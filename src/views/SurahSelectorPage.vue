@@ -2,27 +2,33 @@
   <div>
     <v-container>
       <v-row justify="center">
-        <v-card
+        <v-col
+          cols="12"
+          sm="12"
+          xs="12"
+          md="4"
+          lg="4"
+          xl="3"
           v-for="(surah, i) in surah"
           :key="i"
-          class="mb-2 col-xs-12 col-sm-12 col-md-4 col-lg-3"
-          @click="selectSurah(i + 1)"
-          flat
         >
-          <v-card-title>
-            {{ i + 1 }}. {{ surah.englishName }} <v-spacer></v-spacer>
-            {{ surah.name }}</v-card-title
-          >
-          <v-card-subtitle>
-            {{
-              language == "ID"
-                ? surah.idNameTranslation
-                : surah.englishNameTranslation
-            }}
-            <v-spacer></v-spacer>
-            {{ surah.numberOfAyahs }} {{ language == "ID" ? "Ayat" : "Ayahs" }}
-          </v-card-subtitle>
-        </v-card>
+          <v-card @click="selectSurah(i + 1)" outlined>
+            <v-card-title>
+              {{ i + 1 }}. {{ surah.idName }} <v-spacer></v-spacer>
+              {{ surah.name }}</v-card-title
+            >
+            <v-card-subtitle>
+              {{
+                language == "ID"
+                  ? surah.idNameTranslation
+                  : surah.englishNameTranslation
+              }}
+              <v-spacer></v-spacer>
+              {{ surah.numberOfAyahs }}
+              {{ language == "ID" ? "Ayat" : "Ayahs" }}
+            </v-card-subtitle>
+          </v-card>
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -44,6 +50,9 @@ export default {
     selectSurah(val) {
       console.log(val);
     }
+  },
+  mounted() {
+    store.commit("getSurahData");
   }
 };
 </script>

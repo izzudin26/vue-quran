@@ -1,14 +1,28 @@
 import Vue from "vue";
 import Vuex from "vuex";
-const surahData = require("../data/surah.json");
+import surahData from "../data/surah.json";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    surah: surahData,
+    surah: [] as any,
+    language: "ID",
   },
-  mutations: {},
+  mutations: {
+    getSurahData(state) {
+      const offlineSurah = localStorage.getItem("surah");
+      if (offlineSurah == null) {
+        localStorage.setItem("surah", JSON.stringify(surahData));
+        state.surah = surahData;
+      } else {
+        state.surah = JSON.parse(offlineSurah);
+      }
+    },
+  },
+  getters: {
+    getSurahItem: (state) => (numberSurah: number) => {},
+  },
   actions: {},
   modules: {},
 });

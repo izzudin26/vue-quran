@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/LanguageSelector.vue";
-import SurahSelectorPage from "../views/SurahSelectorPage.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +14,11 @@ const routes: Array<RouteConfig> = [
     path: "/surah",
     name: "selectSurat",
     component: () => import("../views/SurahSelectorPage.vue"),
+  },
+  {
+    path: "/surah/:noSurah",
+    name: "surahView",
+    component: () => import("../views/surahView.vue"),
   },
 ];
 
