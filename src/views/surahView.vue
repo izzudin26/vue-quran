@@ -1,34 +1,43 @@
 <template>
   <div>
     <v-container>
-      <v-row justify="center">
-        <v-col cols="12">
-          <v-row justify="center" align="center">
-            <h2>{{ surahData.idNameTranslation }} - {{ surahData.name }}</h2>
-          </v-row>
-          <v-row justify="center" align="center">
-            <v-col cols="12" v-for="(surah, i) in surahData.ayahs" :key="i">
-              <v-banner>
-                <v-avatar color="green" size="42">
-                  <span class="white--text headline">{{ i + 1 }}</span>
-                </v-avatar>
-                <v-card flat>
-                  <v-card-title>
-                    <v-row justify="end">
-                      <p align="right" class="arab">{{ surah.text.arab }}</p>
-                    </v-row>
-                  </v-card-title>
-                  <v-card-text>
-                    <p class="terjemah" align="justify">
-                      {{ surah.text.id }}
-                    </p>
-                  </v-card-text>
-                </v-card>
-              </v-banner>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
+      <v-fade-transition mode="outin">
+        <v-row justify="center">
+          <v-col cols="12">
+            <v-row justify="center" align="center">
+              <h2>
+                {{
+                  language == "ID"
+                    ? surahData.idNameTranslation
+                    : surahData.englishNameTranslation
+                }}
+                - {{ surahData.name }}
+              </h2>
+            </v-row>
+            <v-row justify="center" align="center">
+              <v-col cols="12" v-for="(surah, i) in surahData.ayahs" :key="i">
+                <v-banner>
+                  <v-avatar color="green" size="42">
+                    <span class="white--text headline">{{ i + 1 }}</span>
+                  </v-avatar>
+                  <v-card flat>
+                    <v-card-title>
+                      <v-row justify="end">
+                        <p align="right" class="arab">{{ surah.text.arab }}</p>
+                      </v-row>
+                    </v-card-title>
+                    <v-card-text>
+                      <p class="terjemah" align="justify">
+                        {{ language == "ID" ? surah.text.id : surah.text.en }}
+                      </p>
+                    </v-card-text>
+                  </v-card>
+                </v-banner>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-fade-transition>
     </v-container>
   </div>
 </template>
@@ -51,6 +60,9 @@ export default {
       } else {
         return JSON.parse(offileSurah);
       }
+    },
+    language() {
+      return this.$store.state.language;
     }
   },
   data: () => ({})

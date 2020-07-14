@@ -12,7 +12,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/surah",
-    name: "selectSurat",
+    name: "selectSurah",
     component: () => import("../views/SurahSelectorPage.vue"),
   },
   {

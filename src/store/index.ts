@@ -19,6 +19,9 @@ export default new Vuex.Store({
         state.surah = JSON.parse(offlineSurah);
       }
     },
+    changeLanguage(state, lang) {
+      state.language = lang;
+    },
   },
   getters: {
     getSurahItem: (state) => (numberSurah: number) => {
