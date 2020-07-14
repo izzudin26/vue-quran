@@ -21,7 +21,9 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    getSurahItem: (state) => (numberSurah: number) => {},
+    getSurahItem: (state) => (numberSurah: number) => {
+      return require(`../data/surah/${numberSurah}.json`);
+    },
   },
   actions: {},
   modules: {},
